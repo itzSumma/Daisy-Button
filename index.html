@@ -1,31 +1,121 @@
 <!doctype html>
-<html>
+<html data-theme="abyss">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DaisyUI + Tailwind Example</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>Explore Daisy Button</title>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <h1 class="py-8 text-3xl font-bold text-center underline text-clifford ">
-      Hello world!
-    </h1>
-          <!-- Button Style -->
+  <body class="bg-[#1e1e2e]">
 
-    <div class="text-center bg-primary/10">
- <button class="rounded-full btn btn-primary bg-slate-950">Click Me</button>
- <button class="rounded-full btn btn-error">Click Me</button>
- <button class="rounded-full btn btn-secondary">Click Me</button>
- <button class="rounded-full btn btn-warning">Click Me</button>
- <button class="rounded-full btn btn-accent">Click Me</button>
- <button class="rounded-full btn btn-neutral">Click Me</button>
-    </div>
-   
+    <!-- ============================================================
+         NAVBAR SECTION
+         CONCEPT: We use DaisyUI's navbar with two different layouts:
+         - Desktop (md and above): shows nav links centered
+         - Mobile (below md): hides links, shows hamburger dropdown
+         The trick is CSS classes like "hidden md:flex" which means:
+         "hide by default, but show as flex on medium+ screens"
+    ============================================================ -->
+    <section>
+      <div class="px-6 py-3 shadow-lg navbar bg-base-300">
+
+        <!-- BRAND (always visible) -->
+        <div class="navbar-start">
+          <a class="text-2xl font-extrabold text-orange-400 transition-colors cursor-pointer hover:text-orange-300">
+            daisyUI
+          </a>
+        </div>
+
+        <!-- 
+          DESKTOP MENU — hidden on mobile, visible on md+ screens
+          "hidden" = display:none by default
+          "md:flex" = display:flex when screen width >= 768px
+        -->
+        <div class="justify-center flex-1 hidden gap-4 md:flex">
+          <a class="text-white rounded-full btn btn-sm btn-outline hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-700">Home</a>
+          <a class="text-white rounded-full btn btn-sm btn-outline hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-700">About</a>
+          <a class="text-white rounded-full btn btn-sm btn-outline hover:bg-gradient-to-r hover:from-orange-500 hover:to-orange-700">Contact</a>
+        </div>
+
+        <!-- RIGHT SIDE: holds both the desktop CTA button and the mobile hamburger -->
+        <div class="gap-2 navbar-end">
+
+          <!-- Desktop CTA button — hidden on mobile -->
+          <a class="hidden text-white transition-colors duration-300 bg-orange-600 rounded-full shadow-lg md:flex btn btn-sm hover:bg-orange-700">
+            Button
+          </a>
+
+          <!-- 
+            MOBILE HAMBURGER — visible only on mobile (md:hidden)
+            DaisyUI's "dropdown" component + "details/summary" technique:
+            <details> is a native HTML element that opens/closes on click
+            <summary> is its clickable trigger (the hamburger icon)
+            No JavaScript needed — pure HTML!
+          -->
+          <div class="md:hidden">
+            <details class="dropdown dropdown-end">
+              <!-- The hamburger trigger button -->
+              <summary class="text-white list-none btn btn-sm btn-ghost">
+                <!-- SVG Hamburger Icon (3 lines) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </summary>
+
+              <!-- 
+                Dropdown menu content
+                "menu" = DaisyUI styled list
+                "dropdown-content" = positions it below the trigger
+                "mt-2" = small gap between trigger and menu
+                "z-[1]" = stacks above other elements (z-index)
+              -->
+              <ul class="menu dropdown-content bg-base-300 rounded-box shadow-xl mt-2 w-52 p-2 z-[1] border border-orange-500/20">
+                <li>
+                  <a class="text-white transition-colors rounded-lg hover:text-orange-400 hover:bg-base-200">
+                    🏠 Home
+                  </a>
+                </li>
+                <li>
+                  <a class="text-white transition-colors rounded-lg hover:text-orange-400 hover:bg-base-200">
+                    👤 About
+                  </a>
+                </li>
+                <li>
+                  <a class="text-white transition-colors rounded-lg hover:text-orange-400 hover:bg-base-200">
+                    📬 Contact
+                  </a>
+                </li>
+                <!-- Divider line -->
+                <div class="my-1 divider opacity-30"></div>
+                <li>
+                  <a class="justify-center text-center text-white transition-colors bg-orange-600 rounded-full hover:bg-orange-700">
+                    Button
+                  </a>
+                </li>
+              </ul>
+            </details>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-12 bg-base-200">
+      <h1 class="mb-8 text-4xl font-bold text-center text-orange-600">
+        Hello world!
+      </h1>
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <button class="rounded-full btn btn-primary btn-outline">Click Me</button>
+        <button class="rounded-full btn btn-error">Click Me</button>
+        <button class="rounded-full btn btn-secondary">Click Me</button>
+        <button class="rounded-full btn btn-warning btn-outline">Click Me</button>
+        <button class="rounded-full btn btn-accent">Click Me</button>
+        <button class="rounded-full btn btn-neutral">Click Me</button>
+      </div>
+    </section>
+
   </body>
 </html>
